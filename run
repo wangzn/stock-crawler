@@ -1,0 +1,55 @@
+#!/usr/bin/php
+<?php
+
+date_default_timezone_set("Asia/Chongqing");
+
+include 'util.php';
+include 'stock.php';
+
+function help() {
+	$str = <<<EOF
+./run
+	  single stock_number : update one single stock
+	  list                : list all stock numbers
+	  all                 : update all stocks
+	  datelist            : print all dates
+
+EOF;
+	echo $str;
+	exit();
+}
+
+function run($argv) {
+	Stock::init();
+	if (count($argv) < 2) {
+		help();
+	}
+	switch($argv[1]) {
+	case "single" :
+		Stock::run_single($argv[2]);
+		break;
+	case "list" :
+        $list = Stock::get_stock_list();
+        plist($list);
+		break;
+	case "all" :
+		Stock::run_all();
+		break;
+	case "datelist" :
+		Stock::get_date_list();
+		break;
+	case "today":
+		Stock::run_today();
+		break;
+	case "yestoday" :
+		Stock::run_yestoday();
+		break;
+	case "lastdays" :
+		Stock::run_lastdays($argv[1]);
+		break;
+	}
+
+}
+
+run($argv);
+?>
