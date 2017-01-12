@@ -9,10 +9,11 @@ include 'stock.php';
 function help() {
 	$str = <<<EOF
 ./run
-	  single stock_number : update one single stock
-	  list                : list all stock numbers
-	  all                 : update all stocks
-	  datelist            : print all dates
+    help                : print this help information
+    single stock_number : update one single stock
+    list                : list all stock numbers
+    all                 : update all stocks
+    datelist            : print all dates
 
 EOF;
 	echo $str;
@@ -24,7 +25,10 @@ function run($argv) {
 	if (count($argv) < 2) {
 		help();
 	}
-	switch($argv[1]) {
+    switch($argv[1]) {
+    case "help" :
+        help();
+        break;
 	case "single" :
 		Stock::run_single($argv[2]);
 		break;
