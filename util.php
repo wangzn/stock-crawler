@@ -5,3 +5,7 @@ function plist($l)
         echo "$k: $v\n";
     }
 }
+
+function http_request($url, $data = array())
+{
+}
